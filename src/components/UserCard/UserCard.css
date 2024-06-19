@@ -1,0 +1,44 @@
+.user-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  max-width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-card__header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.user-card__header h2 {
+  margin: 0;
+}
+
+.user-card__header p {
+  color: #777;
+  font-style: italic;
+}
+
+.user-card__body {
+  margin-bottom: 16px;
+}
+
+.user-card__body p {
+  margin: 8px 0;
+}
+
+.user-card__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.user-card__footer {
+  text-align: center;
+  font-weight: bold;
+}
