@@ -13,7 +13,7 @@ import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import logo from '../../assets/logo.png';  // Asegúrate de que la ruta es correcta
+import logo from '../../assets/logo.png';  
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -70,9 +70,9 @@ const Header = () => {
       <Toolbar style={{ justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
           <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
+            <Link to="/about" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
               <img src={logo} alt="Company Logo" style={{ height: '70px', marginRight: '10px' }} />
-              Company
+              About us
             </Link>
           </Typography>
           <Typography variant="h6" noWrap component="div">
@@ -96,6 +96,7 @@ const Header = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
           <IconButton
             edge="end"
             aria-label="account of current user"
