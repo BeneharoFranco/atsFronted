@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import UserCard from '../../components/UserCard/UserCard';
 import './Users.css'
 import PropTypes from "prop-types";
-import { getAllUsers } from '../../services/userService';
-
+import {getAllUsers} from '../../services/userService'
 
 const Users = () => {
 
@@ -13,6 +12,7 @@ const Users = () => {
         const userList = async ()=>{
             try {
                 const result = await getAllUsers()
+                console.log(result)
                 setUsers(result)
 
             } catch (error) {

@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { login } from "../../services/authService";
+import  {login}  from "../../services/authService";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login(email, password);
+      const data = await login(formData);
       console.log("Login successful:", data);
-      // Redirigir o realizar otras acciones después del inicio de sesión
     } catch (error) {
-      setError("Login failed. Please try again.");
+      console.error("Error logging in:", error);
     }
   };
 
@@ -23,8 +25,9 @@ const Login = () => {
         <label>Email:</label>
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
           required
         />
       </div>
@@ -32,12 +35,12 @@ const Login = () => {
         <label>Password:</label>
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
           required
         />
       </div>
-      {error && <p>{error}</p>}
       <button type="submit">Login</button>
     </form>
   );

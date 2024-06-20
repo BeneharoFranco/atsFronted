@@ -1,15 +1,21 @@
-import { api } from "./config";
+import api from "./config";
 
-export const getAllUsers = async () => {
+const getAllUsers = async () => {
   try {
-    const { result } = await api.get("/user/");
+    const { data } = await api.get("/user/");
 
-    if (!result) {
-      return console.log("Users empty or error");
+    if (!data || data.length === 0) {
+      console.log("Users empty or error");
+      return null;
     }
-    return result;
+    return data;
   } catch (error) {
-    console.error(error);
+    console.error(
+      "Error fetching users:",
+      error.response ? error.response.data : error.message
+    );
+    throw error;
   }
 };
 
+export { getAllUsers };
