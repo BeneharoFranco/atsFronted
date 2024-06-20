@@ -2,9 +2,9 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api/",
-  headers: {
+  /* headers: {
     "Content-Type": "application/json",
-  },
+  }, */
   //   withCredentials: false,
   //   headers: {
   //     'Accept': 'application/json',
@@ -12,7 +12,7 @@ const api = axios.create({
   //   }
 });
 
-api.interceptors.request.use(
+/* api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -23,6 +23,6 @@ api.interceptors.request.use(
   (error) => {
     return Promise.reject(error);
   }
-);
+); */
 
 export default api;

@@ -7,6 +7,7 @@ const login = async (formData) => {
         "Content-Type": "application/json",
       },
     });
+
     localStorage.setItem("token", data.result);
     localStorage.setItem("role", data.role);
     return data;
