@@ -4,7 +4,7 @@ import React from "react"
 const Home = () => {
   return (
     <div>
-      Hello every body!!!
+      Hello every BODY!!!
     </div>
   )
 }
