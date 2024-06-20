@@ -1,0 +1,25 @@
+/* src/components/Header/Header.css */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    margin-right: 20px;
+}
+
+.logo {
+    height: 30px;
+    margin-right: 10px;
+}
