@@ -3,7 +3,7 @@ import UserCard from '../../components/UserCard/UserCard';
 import './Users.css'
 import {getAllUsers} from '../../services/userService'
 
-const Users = () => {
+const User = () => {
 
     const [users, setUsers] =useState([])
 
@@ -31,4 +31,4 @@ console.log(users)
   )
 }
 
-export default Users
+export default User

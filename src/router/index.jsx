@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/Root";
 import NotFound from "../notfound/NotFound";
 import Home from "../page/Home/Home";
-import Users from "../page/Users/Users";
+import User from "../page/Users/Users";
 import Login from "../page/Login/Login";
 import JobOpening from "../page/JobOpening/JobOpening";
 
@@ -28,9 +28,13 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/users",
-        element: <Users />,
+        path: "/User",
+        element: <User />,
       },
+/*       {
+        path: "/User/Add",
+        element: <UserAdd />,
+      }, */
       {
         path: "/JobOpening",
         element: <JobOpening />,

@@ -2,31 +2,22 @@
 import PropTypes from "prop-types";
 import "./UserCard.css";
 
-const UserCard = ({
-  id,
-  first_name,
-  last_name,
-  role,
-  email,
-  phone,
-  photo,
-  valid,
-}) => {
+const UserCard = ({users}) => {
   return (
     <div className="user-card">
       <div className="user-card__header">
         <h2>
-          {first_name} {last_name}
+          {users.first_name} {users.last_name}
         </h2>
-        <p>{role}</p>
+        <p>{users.role}</p>
       </div>
       <div className="user-card__body">
-        <p>Email: {email}</p>
-        <p>Phone: {phone}</p>
-        {photo ? (
+        <p>Email: {users.email}</p>
+        <p>Phone: {users.phone}</p>
+        {users.photo ? (
           <img
-            src={photo}
-            alt={`${first_name} ${last_name}`}
+            src={users.photo}
+            alt={`${users.first_name} ${users.last_name}`}
             className="user-card__photo"
           />
         ) : (
@@ -34,21 +25,15 @@ const UserCard = ({
         )}
       </div>
       <div className="user-card__footer">
-        <p>Status: {valid ? "Active" : "Inactive"}</p>
+        <p>Status: {users.valid ? "Active" : "Inactive"}</p>
       </div>
     </div>
   );
 };
 
 UserCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  first_name: PropTypes.string.isRequired,
-  last_name: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
-  photo: PropTypes.string,
-  valid: PropTypes.bool.isRequired,
+  users: PropTypes.object
+  
 };
 
 export default UserCard;
