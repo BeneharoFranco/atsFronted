@@ -22,7 +22,7 @@ const JobOpening = ({jobOpening, delJobOpening}) => {
       <p>{jobOpening.id}</p>
       <p>{jobOpening.title}</p>
       <button onClick={(e) => {}}>Show</button>
-      <Link color="inherit" href={"/JobOpening/edit/" + jobOpening.id}>Edit</Link>
+      <Link color="inherit" href={"/JobOpening/Edit/" + jobOpening.id}>Edit</Link>
       <button onClick={handleClick}>Eliminar</button>
     </div>
     </>

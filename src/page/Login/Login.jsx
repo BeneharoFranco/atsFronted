@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import  {login}  from "../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -8,12 +9,14 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
+ const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await login(formData);
       console.log("Login successful:", data);
+      navigate("/User");
+
     } catch (error) {
       console.error("Error logging in:", error);
     }

@@ -1,54 +1,89 @@
-
+import React from "react";
 import PropTypes from "prop-types";
-import "./UserCard.css";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Typography,
+  Avatar,
+  Button
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
-const UserCard = ({
-  id,
-  first_name,
-  last_name,
-  role,
-  email,
-  phone,
-  photo,
-  valid,
-}) => {
+
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  maxWidth: 345,
+  margin: "auto",
+  marginTop: theme.spacing(5),
+}));
+
+const UserCard = ({ users, setDel }) => {
   return (
-    <div className="user-card">
-      <div className="user-card__header">
-        <h2>
-          {first_name} {last_name}
-        </h2>
-        <p>{role}</p>
-      </div>
-      <div className="user-card__body">
-        <p>Email: {email}</p>
-        <p>Phone: {phone}</p>
-        {photo ? (
-          <img
-            src={photo}
-            alt={`${first_name} ${last_name}`}
-            className="user-card__photo"
-          />
-        ) : (
-          <p>No Photo Available</p>
-        )}
-      </div>
-      <div className="user-card__footer">
-        <p>Status: {valid ? "Active" : "Inactive"}</p>
-      </div>
-    </div>
+    <StyledCard>
+      <CardHeader
+        avatar={<Avatar>{users.first_name[0]}</Avatar>}
+        title={`${users.first_name} ${users.last_name}`}
+        subheader={users.role}
+      />
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Email: {users.email}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Phone: {users.phone}
+        </Typography>
+      </CardContent>
+      {users.photo ? (
+        <CardMedia
+          component="img"
+          alt={`${users.first_name} ${users.last_name}`}
+          height="140"
+          image={users.photo}
+          title={`${users.first_name} ${users.last_name}`}
+        />
+      ) : (
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            No Photo Available
+          </Typography>
+        </CardContent>
+      )}
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Status: {users.valid ? "Active" : "Inactive"}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Stack direction="row" spacing={2}>
+          <Link
+            to={{
+              pathname: `/User/Edit/${users.id}`,
+            }}
+          >
+            <Button>Edit</Button>
+          </Link>
+          <DeleteModal id={users.id} setDel={setDel}/>
+{/*           <Link
+            to={{
+              pathname: `/User/Show/${users.id}`,
+            }}
+          >
+            <Button>Show</Button>
+          </Link> */}
+        </Stack>
+      </CardContent>
+    </StyledCard>
   );
 };
 
 UserCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  first_name: PropTypes.string.isRequired,
-  last_name: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
-  photo: PropTypes.string,
-  valid: PropTypes.bool.isRequired,
+  users: PropTypes.object,
+  setDel: PropTypes.func
 };
 
 export default UserCard;
