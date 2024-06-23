@@ -37,7 +37,7 @@ const JobOpening = () => {
   return (
     <>
       <div>
-        <Link color="inherit" href="/JobOpening/Add">Añadir</Link>
+        <Link color="inherit" href="/JobOpening/add">Añadir</Link>
         {<ListCard key={"ListCard"} objects={{jobOpenings}} type={"jobOpening"} delObject={(jobOpening) => delJobOpening(jobOpening)} />}
       </div>
     </>

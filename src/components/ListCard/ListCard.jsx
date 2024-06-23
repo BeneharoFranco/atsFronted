@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import JobOpening from "../JobOpening/JobOpening";
+import JobOpeningCard from "../JobOpeningCard/JobOpeningCard";
 
 const ListCard = ({ objects, type, delObject }) => {
   switch (type) {
@@ -9,7 +9,7 @@ const ListCard = ({ objects, type, delObject }) => {
           <div>
             {
               objects.jobOpenings.map((object) => (
-                <JobOpening key={object.id} jobOpening={object} delJobOpening={delObject} />
+                <JobOpeningCard key={object.id} jobOpening={object} delJobOpening={delObject} />
               ))
             }
           </div>

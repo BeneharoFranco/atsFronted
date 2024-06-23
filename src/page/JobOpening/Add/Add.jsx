@@ -44,7 +44,7 @@ const Add = () => {
         <textarea name="description" id="description" placeholder="Descripción del puesto" onChange={handleChange}>{formData.description}</textarea>
         <input type="text" name="location" id="location" placeholder="Localización del puesto" value={formData.location} onChange={handleChange} />
         <input type="date" name="end_date" id="end_date" placeholder="Fecha de cierre del puesto" value={formData.end_date} onChange={handleChange} />
-        <select name="companyId" id="companyId"  value={formData.company} onChange={handleChange}>
+        <select name="companyId" id="companyId"  value={formData.companyId} onChange={handleChange}>
           <option hidden disabled selected>Seleccione compañía</option>
           {
             companies.map((company) => {
