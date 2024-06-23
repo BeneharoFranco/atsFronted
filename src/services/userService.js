@@ -38,7 +38,7 @@ const getOneUser = async (id) => {
       console.log("Users empty or error");
       return null;
     }
-    return data;
+    return data.result;
   } catch (error) {
     console.error(
       "Error fetching users:",

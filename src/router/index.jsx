@@ -8,6 +8,8 @@ import JobOpening from "../page/JobOpening/JobOpening";
 
 import About from "../page/About/About";
 import AddJobOpening from "../page/JobOpening/Add/Add";
+import UserAdd from "../page/Users/UserAdd/UserAdd";
+import UserEdit from "../page/Users/UserEdit/UserEdit";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +33,14 @@ const router = createBrowserRouter([
         path: "/User",
         element: <User />,
       },
-/*       {
+      {
         path: "/User/Add",
         element: <UserAdd />,
-      }, */
+      },
+      {
+        path: "/User/Edit/:id",
+        element: <UserEdit />,
+      },
       {
         path: "/JobOpening",
         element: <JobOpening />,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -6,17 +6,18 @@ import {
   Radio,
   TextField,
   Button,
-  Container,
   Stack,
 } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useNavigate, useParams } from "react-router-dom";
 
-//import UploadFile from "../../../components/UploadFile/UploadFile";
-import { createOneUser } from "../../../services/userService";
-import { useNavigate } from "react-router-dom";
+// import UploadFile from "../../../components/UploadFile/UploadFile";
 
-const UserAdd = () => {
-  const [form, setForm] = React.useState({
+import { getOneUser, editOneUser } from "../../../services/userService";
+
+const UserEdit = () => {
+  const { id } = useParams(); // Extract the ID from the URL
+  const [form, setForm] = useState({
     first_name: "",
     last_name: "",
     role: "",
@@ -25,6 +26,26 @@ const UserAdd = () => {
     password: "",
     photo: null,
   });
+
+  const [error, setError] = useState(false);
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getOneUser(id);
+      setForm({
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        role: user.role || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        password: "",
+        photo: user.photo || null,
+      });
+    };
+
+    fetchUser();
+  }, [id]);
 
   const handleChange = (event) => {
     const { id, name, value } = event.target;
@@ -36,15 +57,13 @@ const UserAdd = () => {
 
   const navigate = useNavigate();
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    editOneUser(id, form);
     console.log(form);
-    createOneUser(form);
     navigate("/User");
   };
-
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
 
   const handleChangeNum = (event) => {
     const newValue = event.target.value;
@@ -54,13 +73,12 @@ const UserAdd = () => {
       setError(false);
       handleChange(event);
     }
-
     setValue(newValue);
   };
 
   return (
     <React.Fragment>
-      <h2>Registro</h2>
+      <h2>Edit User</h2>
       <form onSubmit={handleSubmit}>
         <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
           <TextField
@@ -133,7 +151,7 @@ const UserAdd = () => {
           onChange={handleChangeNum}
         />
         <div>{/*  <UploadFile /> */}</div>
-        <Button type="submit" variant="contained" color="primary" onSubmit={handleSubmit}>
+        <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
       </form>
@@ -141,4 +159,4 @@ const UserAdd = () => {
   );
 };
 
-export default UserAdd;
+export default UserEdit;
