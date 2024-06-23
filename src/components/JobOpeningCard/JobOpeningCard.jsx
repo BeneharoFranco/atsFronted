@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./JobOpeningCard.css";
 import { deleteJobOpening } from "../../services/jobOpeningService";
 import Link from '@mui/material/Link';
+import Show from "../Show/Show";
 
 const JobOpening = ({jobOpening, delJobOpening}) => {
 
@@ -21,7 +22,8 @@ const JobOpening = ({jobOpening, delJobOpening}) => {
     <div>
       <p>{jobOpening.id}</p>
       <p>{jobOpening.title}</p>
-      <button onClick={(e) => {}}>Show</button>
+      <Show key={"Show"}/>
+      {/* <button onClick={(e) => {}}>Show</button> */}
       <Link color="inherit" href={"/JobOpening/Edit/" + jobOpening.id}>Edit</Link>
       <button onClick={handleClick}>Eliminar</button>
     </div>

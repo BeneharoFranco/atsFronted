@@ -54,6 +54,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const pages = [
+  {name: "About us", path: "/about" , image: logo},
+  {name: "Candidates", path: "/candidates"},
+  {name: "Jobs", path: "/JobOpening"},
+  {name: "Users", path: "/User"},
+];
+
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -69,7 +76,7 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar style={{ justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-          <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
+          {/* <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
             <Link to="/about" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
               <img src={logo} alt="Company Logo" style={{ height: '70px', marginRight: '10px' }} />
               About us
@@ -84,7 +91,21 @@ const Header = () => {
             <Link to="/candidates" style={{ textDecoration: 'none', color: 'inherit' }}>
               Candidates
             </Link>
-          </Typography>
+          </Typography> */}
+          {
+            pages.map((page) => {
+              return (
+                <>
+                <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
+                  <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
+                    {page.image !== undefined ? <img src={page.image} alt="Company Logo" style={{ height: '70px', marginRight: '10px' }} /> : ""}
+                    {page.name}
+                  </Link>
+                </Typography>
+                </>
+              )
+            })
+          }
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
           <Search>
