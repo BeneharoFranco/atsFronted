@@ -12,26 +12,14 @@ const Edit = () => {
   const { idJobOpening } = useParams();
   const [companies, setCompanies] = useState([]);
   const [jobOpening, setJobOpening] = useState({});
-  const [formData, setFormData] = useState({ title: "", description: "", location: "", end_date: "", companyId: "" });
-
-  // const useStyles = makeStyles((theme) => ({
-  //   container: {
-  //     display: 'flex',
-  //     flexWrap: 'wrap',
-  //   },
-  //   textField: {
-  //     marginLeft: theme.spacing(1),
-  //     marginRight: theme.spacing(1),
-  //     width: 200,
-  //   },
-  // }));
-
-  // const classes = useStyles();
+  // const [formData, setFormData] = useState({ title: "", description: "", location: "", end_date: "", companyId: "" });
 
   useEffect(() => {
     const obtainJobOpening = async () => {
       try {
         const { result } = await getJobOpening(idJobOpening);
+        if(result.end_date !== undefined && result.end_date !== null)
+          result.end_date = result.end_date.substring(0, 16)
         setJobOpening(result);
       } catch (error) {
         console.error("Error fetching JobOpening ", error);
@@ -47,57 +35,50 @@ const Edit = () => {
     };
 
     obtainJobOpening();
+
     companyList();
   }, [idJobOpening]);
 
-  
-
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    // if(type == "date" || type == "datetime")
-    //   value = new Date(value);
+    const { name, value } = e.target;
     setJobOpening((prevData) => ({ ...prevData, [name]: value }));
-    // setFormData((prevData) => ({ ...prevData, [name]: value }));
-    console.log(jobOpening);
-
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // jobOpening.end_date = new Date(jobOpening.end_date.to).toISOString()
+      jobOpening.end_date = `${jobOpening.end_date}:00.000Z`
       const response = await editJobOpening(idJobOpening, jobOpening);
       // const response = await editJobOpening(idJobOpening, formData);
-      // if(response.result === undefined || response.result === null || !response.result)
-      //   alert("Error al creal el JobOpening");
+      if(response.jobOpening)
+        alert(response.message);
+      else
+        alert("Error al editar el JobOpening");
     } catch (error) {
       alert("Error al creal el JobOpening");
       console.error("Error create JobOpening:", error);
     }
   };
 
-  console.log(jobOpening);
-  const date = jobOpening.end_date.slice(0, 16);
-  console.log(date);
+  
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input type="text" name="title" id="title" placeholder="Título del puesto" value={jobOpening.title} onChange={handleChange} />
         <textarea name="description" id="description" placeholder="Descripción del puesto" onChange={handleChange} value={jobOpening.description}></textarea>
         <input type="text" name="location" id="location" placeholder="Localización del puesto" value={jobOpening.location} onChange={handleChange} />
-        {/* <input type="datetime-local" name="end_date" id="end_date" placeholder="Fecha de cierre del puesto" value={format(new Date(jobOpening.end_date), 'yyyy-MM-ddThh:mm', { awareOfUnicodeTokens: true })} onChange={handleChange} /> */}
-        {/* <input type="datetime-local" name="end_date" id="end_date" placeholder="Fecha de cierre del puesto" value={new Date(jobOpening.end_date)} onChange={handleChange} /> */}
         <input type="datetime-local" name="end_date" id="end_date" placeholder="Fecha de cierre del puesto" value={jobOpening.end_date} onChange={handleChange} />
 
-        <TextField
+        {/* <TextField
         id="datetime-local"
         label="Next appointment"
         type="datetime-local"
-        defaultValue={date}
-        // className={classes.textField}
+        defaultValue={jobOpening.end_date}
         InputLabelProps={{
           shrink: true,
         }}
-        />
+        /> */}
 
         <select name="companyId" id="companyId"  value={jobOpening.companyId} onChange={handleChange}>
           <option hidden disabled selected>Seleccione compañía</option>
@@ -112,7 +93,7 @@ const Edit = () => {
           }
         </select>
         <div>
-          <button>Añadir</button>
+          <button>Editar</button>
           <Link color="inherit" href="/JobOpening">Cancelar</Link>
         </div>
       </form>
