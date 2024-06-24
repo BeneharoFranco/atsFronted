@@ -38,7 +38,7 @@ const UserEdit = ({ open, handleClose, userId, onUpdate }) => {
         role: user.role || "",
         email: user.email || "",
         phone: user.phone || "",
-        password: "",
+        /* password: "", */
         photo: user.photo || null,
       });
     };
