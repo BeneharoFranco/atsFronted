@@ -11,7 +11,7 @@ import { Copyright } from "@mui/icons-material";
 
 export default function BasicList() {
   return (
-    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+    <Box height={"270px"} sx={{ width: "100%", bgcolor: "background.paper" }} component={"footer"}>
       <Divider />
       <Grid container spacing={1}>
         <Grid item xs={2}>

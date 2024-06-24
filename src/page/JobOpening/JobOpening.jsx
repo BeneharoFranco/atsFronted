@@ -9,6 +9,7 @@ import {
 } from "../../services/jobOpeningService";
 import ListCard from "../../components/ListCard/ListCard";
 import Link from '@mui/material/Link';
+import { Box, Container, Grid, Toolbar } from "@mui/material";
 
 const JobOpening = () => {
   const [jobOpenings, setJobOpenings] = useState([]);
@@ -36,10 +37,10 @@ const JobOpening = () => {
 
   return (
     <>
-      <div>
+      <Grid minHeight={"85vh"} container spacing={3} sx={{ }}>
         <Link color="inherit" href="/JobOpening/Add">Añadir</Link>
         {<ListCard key={"ListCard"} objects={{jobOpenings}} type={"jobOpening"} delObject={(jobOpening) => delJobOpening(jobOpening)} />}
-      </div>
+      </Grid>
     </>
   );
 };

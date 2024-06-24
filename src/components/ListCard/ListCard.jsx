@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
 import JobOpeningCard from "../JobOpeningCard/JobOpeningCard";
+import { Box } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const ListCard = ({ objects, type, delObject }) => {
   switch (type) {
     case "jobOpening":
       return (
         <>
-          <div>
+          <Grid2 container spacing={2} sx={{ width: "100%", height: "100%", padding: 2 }} >
             {
               objects.jobOpenings.map((object) => (
                 <JobOpeningCard key={object.id} jobOpening={object} delJobOpening={delObject} />
               ))
             }
-          </div>
+          </Grid2>
         </>
       );
       break;

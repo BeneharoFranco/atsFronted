@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
         loader: () => {
-          if (!localStorage.getItem("token")) {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         path: "/Home",
         element: <Home />,
         loader: () => {
-          if (!localStorage.getItem("token")) {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         path: "/User",
         element: <User />,
         loader: () => {
-          if (!localStorage.getItem("token")) {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         path: "/User/Add",
         element: <UserAdd />,
         loader: () => {
-          if (!localStorage.getItem("token")) {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         path: "/User/Edit/:id",
         element: <UserEdit />,
         loader: () => {
-          if (!localStorage.getItem("token")) {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         //   },
         // ],
         loader: () => {
-          if (!localStorage.getItem("token")) {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
@@ -105,20 +105,41 @@ const router = createBrowserRouter([
       {
         path: "/JobOpening/Add",
         element: <AddJobOpening />,
+        loader: () => {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
+            return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
+          } else {
+            return null;
+          }
+        },
       },
       {
         path: "/JobOpening/Edit/:idJobOpening",
         element: <EditJobOpening />,
+        loader: () => {
+          if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
+            return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
+          } else {
+            return null;
+          }
+        },
       },
       {
         path: "about",
         element: <About />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    loader: () => {
+      if (localStorage.getItem("token") && localStorage.getItem("token") !== undefined) {
+        return redirect("/Home")  //If the user isn't logged in, we redirect to the login page.
+      } else {
+        return null;
+      }
+    },
   },
 ]);
 
