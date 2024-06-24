@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import { login } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material';
+import { Alert, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Paper, Box, Grid, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import registroImage from '../../assets/images/registro.jpeg';
 
+
 const theme = createTheme();
 
+
+
 const Login = () => {
+
+  const [alert, setAlert] = useState(false)
+
+const closeAlert = () => setAlert(false)
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -24,18 +31,21 @@ const Login = () => {
       console.log("Login successful:", data);
       if (data.role == "admin"){
         navigate("/User");        
-      }else{
-        navigate("/JobOpening")
+      }else if (data.role == "recruiter") {
+        navigate("/JobOpening");
+      } else {
+        setAlert(true)
       }
 
     } catch (error) {
+       setAlert(true);
       console.error("Error logging in:", error);
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -44,11 +54,13 @@ const Login = () => {
           md={7}
           sx={{
             backgroundImage: `url(${registroImage})`,
-            backgroundRepeat: 'no-repeat',
+            backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -56,18 +68,23 @@ const Login = () => {
             sx={{
               my: 8,
               mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -96,6 +113,9 @@ const Login = () => {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               /> */}
+              {alert ? <Alert severity="warning" onClose={() => {closeAlert()}}>
+                Email or Password incorrect, try again.
+              </Alert> : <></>}
               <Button
                 type="submit"
                 fullWidth

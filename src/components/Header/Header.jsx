@@ -71,12 +71,14 @@ const pagesRecruiter = [
   { name: "Jobs", path: "/JobOpening" }
 ];
 
-if(localStorage.getItem('role')=="admin"){
+
+const Header = () => {
+  
+  if(localStorage.getItem('role')=="admin"){
   pages = pagesAdmin;
 }else {
   pages = pagesRecruiter;
 }
-const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {

@@ -8,7 +8,7 @@ const login = async (formData) => {
       },
     });
 
-    if(data){
+    if(data.result !== null && data.role !== null){
     localStorage.setItem("token", data.result);
     localStorage.setItem("role", data.role);
     return data;
