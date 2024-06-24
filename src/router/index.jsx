@@ -120,11 +120,11 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
