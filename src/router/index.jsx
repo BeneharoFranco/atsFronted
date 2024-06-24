@@ -70,7 +70,7 @@ const router = createBrowserRouter([
           }
         },
       },
-      {
+      /* {
         path: "/User/Edit/:id",
         element: <UserEdit />,
         loader: () => {
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
             return null;
           }
         },
-      },
+      }, */
       {
         path: "/JobOpening",
         element: <JobOpening />,
