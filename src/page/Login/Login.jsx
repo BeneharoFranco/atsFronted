@@ -15,7 +15,11 @@ const Login = () => {
     try {
       const data = await login(formData);
       console.log("Login successful:", data);
-      navigate("/User");
+      if (data.role == "admin"){
+        navigate("/User");        
+      }else{
+        navigate("/JobOpening")
+      }
 
     } catch (error) {
       console.error("Error logging in:", error);

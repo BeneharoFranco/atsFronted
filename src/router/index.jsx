@@ -50,7 +50,9 @@ const router = createBrowserRouter([
         loader: () => {
           if (!localStorage.getItem("token")) {
             return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
-          } else {
+          } else if (localStorage.getItem("role") !== "admin") {
+            return redirect("/Home");
+          }else {
             return null;
           }
         },
@@ -60,7 +62,9 @@ const router = createBrowserRouter([
         element: <UserAdd />,
         loader: () => {
           if (!localStorage.getItem("token")) {
-            return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
+            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+          } else if (localStorage.getItem("role") !== "admin") {
+            return redirect("/Home");
           } else {
             return null;
           }
@@ -71,7 +75,9 @@ const router = createBrowserRouter([
         element: <UserEdit />,
         loader: () => {
           if (!localStorage.getItem("token")) {
-            return redirect("/login")  //If the user isn't logged in, we redirect to the login page.
+            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+          } else if (localStorage.getItem("role") !== "admin") {
+            return redirect("/Home");
           } else {
             return null;
           }
