@@ -58,27 +58,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 let pages = [];
 
 const pagesAdmin = [
-
   { name: "Candidates", path: "/candidates" },
   { name: "Jobs", path: "/JobOpening" },
   { name: "Users", path: "/User" },
-  { name: "Company", path: "/Company"},
+  { name: "Company", path: "/Company" },
 ];
 
 const pagesRecruiter = [
-
   { name: "Candidates", path: "/candidates" },
-  { name: "Jobs", path: "/JobOpening" }
+  { name: "Jobs", path: "/JobOpening" },
 ];
 
-
 const Header = () => {
-  
-  if(localStorage.getItem('role')=="admin"){
-  pages = pagesAdmin;
-}else {
-  pages = pagesRecruiter;
-}
+  if (localStorage.getItem("role") === "admin") {
+    pages = pagesAdmin;
+  } else {
+    pages = pagesRecruiter;
+  }
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -96,60 +93,39 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar style={{ justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
-          {/* <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
-            <Link to="/about" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
-              <img src={logo} alt="Company Logo" style={{ height: '70px', marginRight: '10px' }} />
-              About us
-            </Link>
-          </Typography>
-          <Typography variant="h6" noWrap component="div">
-            <Link to="/jobs" style={{ textDecoration: 'none', color: 'inherit' }}>
-              Jobs
-            </Link>
-          </Typography>
-          <Typography variant="h6" noWrap component="div">
-            <Link to="/candidates" style={{ textDecoration: 'none', color: 'inherit' }}>
-              Candidates
-            </Link>
-          </Typography> */}
-          {
-          pages.map((page, idx) => {
-            return (
-              <>
-                <Typography
-                  key={idx}
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{
-                    display: { xs: "none", sm: "flex" },
-                    alignItems: "center",
-                  }}
-                >
-                  <Link
-                    to={page.path}
-                    style={{
-                      textDecoration: "none",
-                      color: "inherit",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    {page.image !== undefined ? (
-                      <img
-                        src={page.image}
-                        alt="Company Logo"
-                        style={{ height: "70px", marginRight: "10px" }}
-                      />
-                    ) : (
-                      ""
-                    )}
-                    {page.name}
-                  </Link>
-                </Typography>
-              </>
-            );
-          })}
+          {pages.map((page, idx) => (
+            <Typography
+              key={idx}
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                alignItems: "center",
+              }}
+            >
+              <Link
+                to={page.path}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {page.image !== undefined ? (
+                  <img
+                    src={page.image}
+                    alt="Company Logo"
+                    style={{ height: "70px", marginRight: "10px" }}
+                  />
+                ) : (
+                  ""
+                )}
+                {page.name}
+              </Link>
+            </Typography>
+          ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
           <Search>
@@ -161,7 +137,6 @@ const Header = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-
           <IconButton
             edge="end"
             aria-label="account of current user"
@@ -186,7 +161,6 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {/* <MenuItem onClick={handleClose}>Log In</MenuItem> */}
             <MenuItem onClick={handleClose}>Log Out</MenuItem>
           </Menu>
         </div>
