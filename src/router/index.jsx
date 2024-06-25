@@ -5,12 +5,11 @@ import Home from "../page/Home/Home";
 import User from "../page/Users/Users";
 import Login from "../page/Login/Login";
 import JobOpening from "../page/JobOpening/JobOpening";
-
 import About from "../page/About/About";
 import AddJobOpening from "../page/JobOpening/Add/Add";
 import EditJobOpening from "../page/JobOpening/Edit/Edit";
 import UserAdd from "../page/Users/UserAdd/UserAdd";
-import UserEdit from "../page/Users/UserEdit/UserEdit";
+import Candidate from "../page/Candidate/Candidate";
 
 const router = createBrowserRouter([
   {
@@ -80,21 +79,17 @@ const router = createBrowserRouter([
           }
         },
       },
-      /* {
-        path: "/User/Edit/:id",
-        element: <UserEdit />,
+       {
+        path: "/Candidate",
+        element: <Candidate/>,
         loader: () => {
           if (!localStorage.getItem("token") || localStorage.getItem("token") == undefined) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
             return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
-          } else if (localStorage.getItem("role") !== "admin") {
-            return redirect("/Home");
-          } else {
-            return null;
-          }
+          } 
         },
-      }, */
+      }, 
       {
         path: "/JobOpening",
         element: <JobOpening />,

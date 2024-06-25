@@ -11,7 +11,7 @@ let pages = [];
 
 const pagesAdmin = [
   { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/candidates" },
+  { name: "Candidates", path: "/Candidate" },
   { name: "Jobs", path: "/JobOpening" },
   { name: "Users", path: "/User" },
   { name: "Company", path: "/Company" },
@@ -19,7 +19,7 @@ const pagesAdmin = [
 
 const pagesRecruiter = [
   { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/candidates" },
+  { name: "Candidates", path: "/Candidate" },
   { name: "Jobs", path: "/JobOpening" },
 ];
 

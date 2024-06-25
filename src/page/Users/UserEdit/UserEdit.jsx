@@ -22,7 +22,6 @@ const UserEdit = ({ open, handleClose, userId, onUpdate }) => {
     role: "",
     email: "",
     phone: "",
-    /* password: "", */
     photo: null,
   });
 
@@ -38,7 +37,6 @@ const UserEdit = ({ open, handleClose, userId, onUpdate }) => {
         role: user.role || "",
         email: user.email || "",
         phone: user.phone || "",
-        /* password: "", */
         photo: user.photo || null,
       });
     };
@@ -135,18 +133,7 @@ const UserEdit = ({ open, handleClose, userId, onUpdate }) => {
             required
             sx={{ mb: 4 }}
           />
- {/*          <TextField
-            id="password"
-            type="password"
-            variant="outlined"
-            color="secondary"
-            label="Password"
-            onChange={handleChange}
-            value={form.password}
-            required
-            fullWidth
-            sx={{ mb: 4 }}
-          /> */}
+
           <TextField
             id="phone"
             type="number"
