@@ -22,8 +22,8 @@ import {
   createJobOpening,
   editJobOpening,
   getJobOpening,
-} from "../../../services/jobOpeningService";
-import { getAllCompany } from "../../../services/CompanyService";
+} from "../../services/jobOpeningService";
+import { getAllCompany } from "../../services/CompanyService";
 
 const ModalJobOpening = ({ idJobOpening, handleClose }) => {
   const [formData, setFormData] = useState({

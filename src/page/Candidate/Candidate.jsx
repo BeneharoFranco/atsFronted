@@ -1,8 +1,8 @@
 import "./Candidate.css";
 import { useEffect, useState } from "react";
-import UserCard from "../../components/UserCard/UserCard";
 import Alert from "@mui/material/Alert";
 import { getAllCandidates } from "../../services/candidateService";
+import CandidateCard from "../../components/CandidateCard/CandidateCard";
 
 const Candidate = () => {
   const [list, setList] = useState([]);
@@ -39,7 +39,7 @@ const Candidate = () => {
   };
 
   const handleUpdate = () => {
-    setDel(!del); // Cambia el estado de 'del' para forzar una actualización de datos
+    setDel(!del);
   };
 
   return (
@@ -48,7 +48,7 @@ const Candidate = () => {
         <Alert severity="error">Error fetching Candidates</Alert>
       ) : (
         list.map((data) => (
-          <UserCard
+          <CandidateCard
             key={data.id}
             candidate={data}
             setList={setList}
