@@ -61,7 +61,7 @@ const Root = ({ children }) => {
             <Container sx={{ mt: 12, mb: 4 }}>
               <Grid container>{children ?? <Outlet />}</Grid>
             </Container>
-            {/* <Footer key={"footer"} /> */}
+            <Footer key={"footer"} /> 
           </Box>
         </Box>
       </ThemeProvider>

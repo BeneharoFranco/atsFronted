@@ -38,7 +38,7 @@ const AppBar = styled(MuiAppBar, {
 
 const defaultTheme = createTheme();
 
-const Header = ({open, toggleDrawer}) => {
+const Header = ({ open, toggleDrawer }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -93,37 +93,37 @@ const Header = ({open, toggleDrawer}) => {
                 <img
                   src={logo}
                   alt="Company Logo"
-                  style={{ height: "70px" }}
+                  style={{ height: "70px", width: "auto", aspectRatio: "1 / 1" }} // added aspectRatio for better width-height adjustment
                 />
                 ATS
               </Link>
             </Typography>
             <IconButton
-            edge="end"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            color="inherit"
-            onClick={handleMenu}
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Log Out</MenuItem>
-          </Menu>
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+              onClick={handleMenu}
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
       </Box>
