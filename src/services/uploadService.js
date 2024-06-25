@@ -1,22 +1,15 @@
 import api from "./config";
 
-class UploadFilesService {
-  upload(file, onUploadProgress) {
-    let formData = new FormData();
-
-    formData.append("file", file);
-
-    return api.post("/upload", formData, {
+const upload = async (formData)=>{
+  try {
+    const result = await api.post("/upload", formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
-      onUploadProgress,
     });
-  }
-
-  getFiles() {
-    return api.get("/files");
+    
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
-
-export default new UploadFilesService();
