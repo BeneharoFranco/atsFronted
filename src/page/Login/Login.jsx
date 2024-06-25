@@ -15,7 +15,7 @@ const Login = () => {
 
   const [alert, setAlert] = useState(false)
 
-const closeAlert = () => setAlert(false)
+  const closeAlert = () => setAlert(false)
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
