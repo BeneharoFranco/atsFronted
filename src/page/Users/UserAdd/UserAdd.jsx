@@ -14,7 +14,10 @@ import {
   DialogActions,
 } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { createOneUser  } from "../../../services/userService";
+import { useNavigate } from "react-router-dom";
+
+//import UploadFile from "../../../components/UploadFile/UploadFile";
+import { createOneUser } from "../../../services/userService";
 
 const UserAdd = ({ open, handleClose, onUpdate }) => {
   const [form, setForm] = useState({
