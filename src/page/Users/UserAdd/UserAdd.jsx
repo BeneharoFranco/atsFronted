@@ -36,10 +36,10 @@ const UserAdd = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(form);
-    createOneUser(form);
+    await createOneUser(form);
     navigate("/User");
   };
 
