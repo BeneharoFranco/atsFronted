@@ -10,16 +10,16 @@ import Drawer from "../components/Drawer/Drawer";
 let pages = [];
 
 const pagesAdmin = [
-  { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/candidates" },
+  // { name: "Home", path: "/Home" },
+  { name: "Candidates", path: "/Candidates" },
   { name: "Jobs", path: "/JobOpening" },
   { name: "Users", path: "/User" },
   { name: "Company", path: "/Company" },
 ];
 
 const pagesRecruiter = [
-  { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/candidates" },
+  // { name: "Home", path: "/Home" },
+  { name: "Candidates", path: "/Candidates" },
   { name: "Jobs", path: "/JobOpening" },
 ];
 

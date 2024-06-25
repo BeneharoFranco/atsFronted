@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import "./JobOpening.css";
-import "./ModalJobOpening";
-import {
-  getAllJobOpening,
-//   getJobOpening,
-//   createJobOpening,
-//   editJobOpening,
-//   deleteJobOpening,
-} from "../../services/jobOpeningService";
+import Add from "./Add/Add";
+
+import { getAllJobOpening } from "../../services/jobOpeningService";
 import ListCard from "../../components/ListCard/ListCard";
-import Link from '@mui/material/Link';
-import { Box, Container, Grid, Toolbar } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Button } from "@mui/material";
+import Edit from "./Edit/Edit";
 
 const JobOpening = () => {
   const [jobOpenings, setJobOpenings] = useState([]);
-  const [jobOpeningDel, setJobOpeningDel] = useState(null);
-  const [open, setOpen] = useState(false);
+  // const [jobOpeningDel, setJobOpeningDel] = useState(null);
+  const [charge, setCharge] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
+  const [jobOpeningId, setJobOpeningId] = useState(null);
 
   useEffect(() => {
     const jobOpeningList = async () => {
@@ -24,34 +22,68 @@ const JobOpening = () => {
         const { result } = await getAllJobOpening();
         setJobOpenings(result);
       } catch (error) {
-        console.error("Error fetching JobOpening ", error);
+        // console.error("Error fetching JobOpening ", error);
+        alert("Error Jobopening")
       }
     };
     jobOpeningList();
-  }, [jobOpeningDel]);
+  }, [charge]);
 
   const delJobOpening = (jobOpening) => {
     const position = jobOpenings.indexOf(jobOpening);
-    if(position != -1){
+    if (position != -1) {
       jobOpenings.splice(position, 1);
-      setJobOpeningDel(jobOpening);
+      // setJobOpeningDel(jobOpening);
     }
   };
 
-  const handleOpen = () => {
-    setOpen(true);
+  // Modal open
+  const handleAddOpen = () => {
+    setOpenAdd(true);
+  };
+  const handleAddClose = () => {
+    setOpenAdd(false);
+  };
+  // Modal edit
+  const handleEditOpen = (jobOpeningId) => {
+    setJobOpeningId(jobOpeningId);
+    setOpenEdit(true);
+  };
+  const handleEditClose = () => {
+    setJobOpeningId(null);
+    setOpenEdit(false);
+  };
+
+  const handleUpdate = () => {
+    // Trigger a re-fetch of the user list
+    setCharge(true);
   };
 
   return (
     <>
-      <Grid minHeight={"85vh"} container spacing={3} sx={{ }}>
-        {/* <Link color="inherit" href="/JobOpening/Add">Añadir</Link> */}
-        <Button variant="contained" onClick={handleOpen} sx={{ height: "40px" }}>Add</Button>
+      <Grid2 minHeight={"85vh"} container spacing={3} width={"100%"} sx={{ flexGrow: "1" }}
+      >
+        <Button variant="contained" onClick={handleAddOpen} sx={{ height: "40px" }} >Add</Button>
 
-        {<ListCard key={"ListCard"} objects={{jobOpenings}} type={"jobOpening"} delObject={(jobOpening) => delJobOpening(jobOpening)} />}
+        <Grid2 container xs={12}
+          spacing={3}
+          sx={{ width: "100%", height: "100%", padding: 2, flexGrow: "1", alignContent: "flex-start", }}
+        >
+          {
+            <ListCard 
+              key={"ListCard"} 
+              objects={{ jobOpenings }} 
+              type={"jobOpening"} 
+              delObject={(jobOpening) => delJobOpening(jobOpening)} 
+              editObject={handleEditOpen}
+              setCharge={setCharge}
+              />
+          }
 
-        <ModalJobOpening />
-      </Grid>
+          <Add open={openAdd} handleClose={handleAddClose} onUpdate={handleUpdate} />
+          <Edit open={openEdit} handleClose={handleEditClose} onUpdate={handleUpdate} jobOpeningId={jobOpeningId}/>
+        </Grid2>
+      </Grid2>
     </>
   );
 };

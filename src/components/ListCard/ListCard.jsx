@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import UserCard from "../UserCard/UserCard";
 
-const ListCard = ({ objects, type, delObject, editObject }) => {
+const ListCard = ({ objects, type, delObject, editObject, setCharge }) => {
   switch (type) {
     case "jobOpening":
       return (
@@ -19,6 +19,8 @@ const ListCard = ({ objects, type, delObject, editObject }) => {
                 key={object.id}
                 jobOpening={object}
                 delJobOpening={delObject}
+                setCharge={setCharge}
+                edit={editObject}
               />
             ))}
           </Grid2>
@@ -55,6 +57,7 @@ ListCard.propTypes = {
   type: PropTypes.string,
   delObject: PropTypes.func,
   editObject: PropTypes.func,
+  setCharge: PropTypes.func,
 };
 
 export default ListCard;
