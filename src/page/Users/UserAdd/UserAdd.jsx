@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -6,8 +7,11 @@ import {
   Radio,
   TextField,
   Button,
-  Container,
   Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useNavigate } from "react-router-dom";
@@ -15,16 +19,19 @@ import { useNavigate } from "react-router-dom";
 //import UploadFile from "../../../components/UploadFile/UploadFile";
 import { createOneUser } from "../../../services/userService";
 
-const UserAdd = () => {
-  const [form, setForm] = React.useState({
+const UserAdd = ({ open, handleClose, onUpdate }) => {
+  const [form, setForm] = useState({
     first_name: "",
     last_name: "",
     role: "",
     email: "",
     phone: "",
-    password: "",
     photo: null,
+    password: "1234",
   });
+
+  const [error, setError] = useState(false);
+  const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     const { id, name, value } = event.target;
@@ -34,17 +41,12 @@ const UserAdd = () => {
     });
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(form);
     await createOneUser(form);
-    navigate("/User");
+    onUpdate();
+    handleClose();
   };
-
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
 
   const handleChangeNum = (event) => {
     const newValue = event.target.value;
@@ -54,91 +56,99 @@ const UserAdd = () => {
       setError(false);
       handleChange(event);
     }
-
     setValue(newValue);
   };
 
   return (
-    <React.Fragment>
-      <h2>Registro</h2>
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Add User</DialogTitle>
       <form onSubmit={handleSubmit}>
-        <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-          <TextField
-            id="first_name"
-            type="text"
-            variant="outlined"
-            color="secondary"
-            label="First Name"
-            value={form.first_name}
-            onChange={handleChange}
-            fullWidth
-            required
-          />
-          <TextField
-            id="last_name"
-            type="text"
-            variant="outlined"
-            color="secondary"
-            label="Last Name"
-            value={form.last_name}
-            onChange={handleChange}
-            fullWidth
-            required
-          />
-        </Stack>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Role</FormLabel>
-          <RadioGroup name="role" value={form.role} onChange={handleChange} row>
-            <FormControlLabel
-              value="recruiter"
-              control={<Radio />}
-              label="Recruiter"
+        <DialogContent>
+          <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+            <TextField
+              id="first_name"
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="First Name"
+              value={form.first_name}
+              onChange={handleChange}
+              fullWidth
+              required
             />
-            <FormControlLabel value="admin" control={<Radio />} label="Admin" />
-          </RadioGroup>
-        </FormControl>
-        <TextField
-          id="email"
-          type="email"
-          variant="outlined"
-          color="secondary"
-          label="Email"
-          value={form.email}
-          onChange={handleChange}
-          fullWidth
-          required
-          sx={{ mb: 4 }}
-        />
-        <TextField
-          id="password"
-          type="password"
-          variant="outlined"
-          color="secondary"
-          label="Password"
-          onChange={handleChange}
-          value={form.password}
-          required
-          fullWidth
-          sx={{ mb: 4 }}
-        />
-        <TextField
-          id="phone"
-          type="number"
-          variant="outlined"
-          color="secondary"
-          label="Phone"
-          error={error}
-          helperText={error ? "Only numbers are allowed" : ""}
-          value={form.phone}
-          onChange={handleChangeNum}
-        />
-        <div>{/*  <UploadFile /> */}</div>
-        <Button type="submit" variant="contained" color="primary" onSubmit={handleSubmit}>
-          Submit
-        </Button>
+            <TextField
+              id="last_name"
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="Last Name"
+              value={form.last_name}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Stack>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Role</FormLabel>
+            <RadioGroup
+              name="role"
+              value={form.role}
+              onChange={handleChange}
+              row
+            >
+              <FormControlLabel
+                value="recruiter"
+                control={<Radio />}
+                label="Recruiter"
+              />
+              <FormControlLabel
+                value="admin"
+                control={<Radio />}
+                label="Admin"
+              />
+            </RadioGroup>
+          </FormControl>
+          <TextField
+            id="email"
+            type="email"
+            variant="outlined"
+            color="secondary"
+            label="Email"
+            value={form.email}
+            onChange={handleChange}
+            fullWidth
+            required
+            sx={{ mb: 4 }}
+          />
+          <TextField
+            id="phone"
+            type="number"
+            variant="outlined"
+            color="secondary"
+            label="Phone"
+            error={error}
+            helperText={error ? "Only numbers are allowed" : ""}
+            value={form.phone}
+            onChange={handleChangeNum}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+        </DialogActions>
       </form>
-    </React.Fragment>
+    </Dialog>
   );
+};
+
+UserAdd.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
+  onUpdate: PropTypes.func,
 };
 
 export default UserAdd;

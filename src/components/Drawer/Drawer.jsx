@@ -14,11 +14,9 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const drawerWidth = 240;
-
 const CustomDrawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({ theme, open, drawerWidth }) => ({
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
@@ -42,10 +40,10 @@ const CustomDrawer = styled(MuiDrawer, {
   },
 }));
 
-const Drawer = ({ open, toggleDrawer, pages }) => {
+const Drawer = ({open, toggleDrawer, pages, drawerWidth}) => {
   return (
     <>
-      <CustomDrawer variant="permanent" open={open}>
+      <CustomDrawer variant="permanent" open={open} drawerWidth={drawerWidth}>
         <Toolbar
           sx={{
             display: "flex",
@@ -78,6 +76,7 @@ Drawer.propTypes = {
   open: PropTypes.bool,
   toggleDrawer: PropTypes.func,
   pages: PropTypes.array,
+    drawerWidth: PropTypes.number,
 };
 
 export default Drawer;
