@@ -16,11 +16,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 
-const drawerWidth = 240;
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({ theme, open, drawerWidth }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -38,7 +36,11 @@ const AppBar = styled(MuiAppBar, {
 
 const defaultTheme = createTheme();
 
+<<<<<<< HEAD
 const Header = ({ open, toggleDrawer }) => {
+=======
+const Header = ({open, toggleDrawer, drawerWidth}) => {
+>>>>>>> 1024ce58ddacbe9b8012c263f04164d8dee02603
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -56,7 +58,7 @@ const Header = ({ open, toggleDrawer }) => {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open} drawerWidth={drawerWidth}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -134,6 +136,7 @@ const Header = ({ open, toggleDrawer }) => {
 Header.propTypes = {
   open: PropTypes.bool,
   toggleDrawer: PropTypes.func,
+  drawerWidth: PropTypes.number,
 };
 
 export default Header;
