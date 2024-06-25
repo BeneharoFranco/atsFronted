@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UploadService from "../../services/uploadService";
+import Upload from "../../services/uploadService";
 import {
   LinearProgress,
   Box,
@@ -27,7 +27,6 @@ export default class UploadFile extends Component {
 
     this.state = {
       currentFile: undefined,
-      previewImage: undefined,
       progress: 0,
       message: "",
       isError: false,
@@ -39,12 +38,20 @@ export default class UploadFile extends Component {
   }
 
   selectFile(event) {
-    this.setState({
-      currentFile: event.target.files[0],
-      previewImage: URL.createObjectURL(event.target.files[0]),
-      progress: 0,
-      message: "",
-    });
+    const file = event.target.files[0];
+    if (file && file.type === "application/pdf") {
+      this.setState({
+        currentFile: file,
+        progress: 0,
+        message: "",
+      });
+    } else {
+      this.setState({
+        currentFile: undefined,
+        message: "Please select a PDF file.",
+        isError: true,
+      });
+    }
   }
 
   upload() {
@@ -52,17 +59,16 @@ export default class UploadFile extends Component {
       progress: 0,
     });
 
-    UploadService.upload(this.state.currentFile, (event) => {
-      this.setState({
-        progress: Math.round((100 * event.loaded) / event.total),
-      });
-    })
+    const formData = new FormData();
+    formData.append("file", this.state.currentFile);
+
+    Upload.upload(formData)
       .then((response) => {
         this.setState({
           message: response.data.message,
           isError: false,
         });
-        return UploadService.getFiles();
+        
       })
       .then((files) => {
         this.setState({
@@ -72,30 +78,15 @@ export default class UploadFile extends Component {
       .catch((err) => {
         this.setState({
           progress: 0,
-          message: "Could not upload the image!",
+          message: "Could not upload the file!",
           currentFile: undefined,
           isError: true,
         });
       });
   }
 
-  componentDidMount() {
-    UploadService.getFiles().then((response) => {
-      this.setState({
-        imageInfos: response.data,
-      });
-    });
-  }
-
   render() {
-    const {
-      currentFile,
-      previewImage,
-      progress,
-      message,
-      imageInfos,
-      isError,
-    } = this.state;
+    const { currentFile, progress, message, imageInfos, isError } = this.state;
 
     return (
       <div className="mg20">
@@ -105,11 +96,11 @@ export default class UploadFile extends Component {
             name="btn-upload"
             style={{ display: "none" }}
             type="file"
-            accept="image/*"
+            accept="application/pdf"
             onChange={this.selectFile}
           />
           <Button className="btn-choose" variant="outlined" component="span">
-            Choose Image
+            Choose PDF
           </Button>
         </label>
         <div className="file-name">{currentFile ? currentFile.name : null}</div>
@@ -138,12 +129,6 @@ export default class UploadFile extends Component {
           </Box>
         )}
 
-        {previewImage && (
-          <div>
-            <img className="preview my20" src={previewImage} alt="" />
-          </div>
-        )}
-
         {message && (
           <Typography
             variant="subtitle2"
@@ -153,23 +138,19 @@ export default class UploadFile extends Component {
           </Typography>
         )}
 
-        <Typography variant="h6" className="list-header">
-          List of Images
+        {/* <Typography variant="h6" className="list-header">
+          List of Files
         </Typography>
         <ul className="list-group">
           {imageInfos &&
-            imageInfos.map((image, index) => (
+            imageInfos.map((file, index) => (
               <ListItem divider key={index}>
-                <img
-                  src={image.url}
-                  alt={image.name}
-                  height="80px"
-                  className="mr20"
-                />
-                <a href={image.url}>{image.name}</a>
+                <a href={file.url} target="_blank" rel="noopener noreferrer">
+                  {file.name}
+                </a>
               </ListItem>
             ))}
-        </ul>
+        </ul> */}
       </div>
     );
   }

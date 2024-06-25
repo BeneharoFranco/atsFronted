@@ -25,8 +25,10 @@ const pagesRecruiter = [
 
 if (localStorage.getItem("role") === "admin") {
   pages = pagesAdmin;
-} else {
+} else if (localStorage.getItem("role") === "recruiter") {
   pages = pagesRecruiter;
+} else {
+  pages = [{ name: "Register", path: "/CandidateAdd" }];
 }
 
 // const pages = [

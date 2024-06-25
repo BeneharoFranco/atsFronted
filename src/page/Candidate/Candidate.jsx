@@ -1,32 +1,31 @@
-import './Candidate.css'
+import "./Candidate.css";
 import { useEffect, useState } from "react";
 import UserCard from "../../components/UserCard/UserCard";
 import Alert from "@mui/material/Alert";
-import { getAllCandidates } from '../../services/candidateService';
+import { getAllCandidates } from "../../services/candidateService";
 
 const Candidate = () => {
-
- const [list, setList] = useState([]);
+  const [list, setList] = useState([]);
   const [alert, setAlert] = useState(false);
   const [del, setDel] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [selectedCanId, setSelectedCanId] = useState(null);
 
   useEffect(() => {
-    const candidateList = async () => {
+    const fetchData = async () => {
       try {
-        const { result } = await getAllCandidates();
+        const result = await getAllCandidates();
         if (!result || result.length === 0) {
           setAlert(true);
+        } else {
+          setList(result);
         }
-        setList(result);
-        setDel(false);
       } catch (error) {
-        console.error("Error fetching USERS ", error);
+        console.error("Error fetching candidates:", error);
         setAlert(true);
       }
     };
-    candidateList();
+    fetchData();
   }, [del]);
 
   const handleEditOpen = (canId) => {
@@ -40,25 +39,25 @@ const Candidate = () => {
   };
 
   const handleUpdate = () => {
-    // Trigger a re-fetch of the user list
-    setDel(true);
+    setDel(!del); // Cambia el estado de 'del' para forzar una actualización de datos
   };
 
   return (
     <div>
       {alert ? (
-        <Alert severity="error">Error fetching Users</Alert>
+        <Alert severity="error">Error fetching Candidates</Alert>
       ) : (
         list.map((data) => (
           <UserCard
             key={data.id}
-            candidates={data}
+            candidate={data}
             setList={setList}
             setDel={setDel}
             onEdit={handleEditOpen}
           />
         ))
       )}
+      {/* Componente para editar */}
       {/* <UserEdit
         open={openEdit}
         handleClose={handleEditClose}
@@ -67,7 +66,6 @@ const Candidate = () => {
       /> */}
     </div>
   );
+};
 
-}
-
-export default Candidate
+export default Candidate;

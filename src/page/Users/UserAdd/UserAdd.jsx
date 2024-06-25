@@ -10,10 +10,10 @@ import {
   Stack,
 } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useNavigate } from "react-router-dom";
 
 //import UploadFile from "../../../components/UploadFile/UploadFile";
 import { createOneUser } from "../../../services/userService";
-import { useNavigate } from "react-router-dom";
 
 const UserAdd = () => {
   const [form, setForm] = React.useState({
