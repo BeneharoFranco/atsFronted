@@ -7,14 +7,11 @@ import {
   CardMedia,
   Typography,
   Avatar,
-  Button
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
-
-
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -22,7 +19,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   marginTop: theme.spacing(5),
 }));
 
-const UserCard = ({ users, setDel }) => {
+const UserCard = ({ users, setDel, onEdit }) => {
   return (
     <StyledCard>
       <CardHeader
@@ -60,21 +57,8 @@ const UserCard = ({ users, setDel }) => {
       </CardContent>
       <CardContent>
         <Stack direction="row" spacing={2}>
-          <Link
-            to={{
-              pathname: `/User/Edit/${users.id}`,
-            }}
-          >
-            <Button>Edit</Button>
-          </Link>
-          <DeleteModal id={users.id} setDel={setDel}/>
-{/*           <Link
-            to={{
-              pathname: `/User/Show/${users.id}`,
-            }}
-          >
-            <Button>Show</Button>
-          </Link> */}
+          <Button onClick={() => onEdit(users.id)}>Edit</Button>
+          <DeleteModal id={users.id} setDel={setDel} />
         </Stack>
       </CardContent>
     </StyledCard>
@@ -83,7 +67,8 @@ const UserCard = ({ users, setDel }) => {
 
 UserCard.propTypes = {
   users: PropTypes.object,
-  setDel: PropTypes.func
+  setDel: PropTypes.func,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default UserCard;
