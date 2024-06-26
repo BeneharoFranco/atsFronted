@@ -8,9 +8,16 @@ const login = async (formData) => {
       },
     });
 
+    if(data.result !== null && data.role !== null){
     localStorage.setItem("token", data.result);
     localStorage.setItem("role", data.role);
     return data;
+
+    } else {
+      console.log("error");
+    }
+
+    
   } catch (error) {
     console.log(error);
     throw error;
