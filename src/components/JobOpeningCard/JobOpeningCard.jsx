@@ -14,20 +14,23 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Chip,
+  Stack,
 } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { styled } from "@mui/material/styles";
-import Link from "@mui/material/Link";
-import Show from "../Show/Show";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import Moment from 'moment';
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  maxWidth: 345,
-  margin: "auto",
-  marginTop: theme.spacing(5),
+  // maxWidth: 345,
+  flexGrow: 1,
+  position: "relative"
+  // margin: "auto",
+  // marginTop: theme.spacing(5),
 }));
 
-const JobOpening = ({ jobOpening, delJobOpening }) => {
+const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
   // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -47,58 +50,49 @@ const JobOpening = ({ jobOpening, delJobOpening }) => {
       setAnchorEl(null);
     } catch (error) {
       alert("Error al eliminar el JobOpening");
-      console.error("Error eliminar JobOpening:", error);
+      // console.error("Error eliminar JobOpening:", error);
     }
   };
 
+  Moment.locale('es');
+
   return (
     <>
-      {/* <StyledCard> */}
-      <Grid2 xs={12} sm={6} md={3} sx={{  }}>
-        <Card sx={{  }}>
+      <Grid2 xs={12} md={6} lg={4} sx={{ flexGrow: "1", maxHeight: "250px"}}>
+        <StyledCard>
           <CardHeader
-            action={
-              <IconButton aria-label="settings" onClick={handleClickMenu}>
-                <MoreVertIcon />
-              </IconButton>
-            }
+            // action={
+            //   <IconButton aria-label="settings" onClick={handleClickMenu}>
+            //     <MoreVertIcon />
+            //   </IconButton>
+            // }
             title={`${jobOpening.title}`}
-            subheader={<Avatar>{jobOpening.id_company}</Avatar>}
+            // subheader={<Avatar>{jobOpening.id_company}</Avatar>}
+            subheader={jobOpening.description}
           />
 
-          <Menu
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleCloseMenu}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            <MenuItem onClick={handleCloseMenu}>
-              <Link color="inherit" href={"/JobOpening/Edit/" + jobOpening.id}>Edit</Link>
-            </MenuItem>
-            <MenuItem onClick={handleClickDelete}>Delete</MenuItem>
-            <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
-          </Menu>
-        </Card>
-      </Grid2>
-      {/* </StyledCard> */}
+          <Chip label={jobOpening.status} color="success" sx={{ position: "absolute", top: "10px", right: "10px" }}/>
 
-      {/* <div>
-        <p>{jobOpening.id}</p>
-        <p>{jobOpening.title}</p>
-        <Show key={"Show"} /> */}
-        {/* <button onClick={(e) => {}}>Show</button> */}
-        
-        {/* <button onClick={handleClickDelete}>Eliminar</button>
-      </div> */}
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Posting Date: {Moment(jobOpening.posting_date).format('DD MMM YYYY hh:mm') || ""}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              End Date: {Moment(jobOpening.end_date).format('DD MMM YYYY hh:mm') || ""}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Location: {jobOpening.location || ""}
+            </Typography>
+          </CardContent>
+
+          <CardContent>
+          <Stack direction="row" spacing={2}>
+            <Button onClick={() => edit(jobOpening.id)}>Edit</Button>
+            <DeleteModal id={jobOpening.id} setDel={setCharge} />
+          </Stack>
+        </CardContent>
+        </StyledCard>
+      </Grid2>
     </>
   );
 };
@@ -106,6 +100,8 @@ const JobOpening = ({ jobOpening, delJobOpening }) => {
 JobOpening.propTypes = {
   jobOpening: PropTypes.object,
   delJobOpening: PropTypes.func,
+  setCharge: PropTypes.func,
+  edit: PropTypes.func,
 };
 
 export default JobOpening;

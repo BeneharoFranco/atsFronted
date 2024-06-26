@@ -1,25 +1,25 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
+// import Footer from "../components/Footer/Footer";
 import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme} from '@mui/material/styles';
 import Drawer from "../components/Drawer/Drawer";
+import { Outlet } from "react-router-dom";
 
 let pages = [];
 
 const pagesAdmin = [
-  { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/candidates" },
+  // { name: "Home", path: "/Home" },
+  { name: "Candidates", path: "/Candidate" },
   { name: "Jobs", path: "/JobOpening" },
   { name: "Users", path: "/User" },
   { name: "Company", path: "/Company" },
 ];
 
 const pagesRecruiter = [
-  { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/candidates" },
+  // { name: "Home", path: "/Home" },
+  { name: "Candidates", path: "/Candidate" },
   { name: "Jobs", path: "/JobOpening" },
 ];
 
@@ -42,8 +42,10 @@ const Root = ({ children }) => {
 
   if (localStorage.getItem("role") === "admin") {
     pages = pagesAdmin;
-  } else {
+  } else if (localStorage.getItem("role") === "recruiter") {
     pages = pagesRecruiter;
+  } else {
+    pages = [{ name: "Register", path: "/Register" }];
   }
 
   return (

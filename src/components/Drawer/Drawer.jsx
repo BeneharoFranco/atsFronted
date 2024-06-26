@@ -1,10 +1,17 @@
-// import React from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import MuiDrawer from '@mui/material/Drawer';
+import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Divider, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
+import {
+  Divider,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 const CustomDrawer = styled(MuiDrawer, {
@@ -51,18 +58,14 @@ const Drawer = ({open, toggleDrawer, pages, drawerWidth}) => {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {pages.map((page) => {
-            return (
-              <>
-                <ListItemButton component={Link} to={page.path}>
-                  <ListItemIcon>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={page.name} />
-                </ListItemButton>
-              </>
-            );
-          })}
+          {pages.map((page, idx) => (
+            <ListItemButton key={idx} component={Link} to={page.path}>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary={page.name} />
+            </ListItemButton>
+          ))}
         </List>
       </CustomDrawer>
     </>
@@ -70,10 +73,10 @@ const Drawer = ({open, toggleDrawer, pages, drawerWidth}) => {
 };
 
 Drawer.propTypes = {
-    open: PropTypes.bool,
-    toggleDrawer: PropTypes.func,
-    pages: PropTypes.object,
+  open: PropTypes.bool,
+  toggleDrawer: PropTypes.func,
+  pages: PropTypes.array,
     drawerWidth: PropTypes.number,
-  };
+};
 
 export default Drawer;
