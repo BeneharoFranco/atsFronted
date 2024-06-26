@@ -73,8 +73,10 @@ const Add = ({ open, handleClose, onUpdate }) => {
         console.error("Error fetching JobOpening ", error);
       }
     };
-    companyList();
-  }, []);
+
+    if(open)
+      companyList();
+  }, [open]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

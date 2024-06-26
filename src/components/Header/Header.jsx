@@ -45,10 +45,17 @@ const Header = ({open, toggleDrawer, drawerWidth}) => {
 
   const navigate = useNavigate();
   const handleClose = () => {
+    setAnchorEl(null);
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("role");
+    // navigate("/Login");
+    // navigate("/Home");
+  };
+  const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    navigate("/Home");
-  };
+    navigate("/Login");
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -80,7 +87,7 @@ const Header = ({open, toggleDrawer, drawerWidth}) => {
               sx={{ flexGrow: 1 }}
             >
               <Link
-                to={"/Home"}
+                // to={"/Home"}
                 style={{
                   textDecoration: "none",
                   color: "inherit",
@@ -109,18 +116,20 @@ const Header = ({open, toggleDrawer, drawerWidth}) => {
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: "bottom",
+              horizontal: "left",
             }}
             keepMounted
             transformOrigin={{
               vertical: "top",
-              horizontal: "right",
+              horizontal: "left",
             }}
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Log Out</MenuItem>
+            <MenuItem onClick={() => {handleClose();navigate("/Register");}}>Register</MenuItem>
+            {localStorage.getItem("token") ? <MenuItem onClick={logout}>Log Out</MenuItem> : <MenuItem onClick={() => {handleClose(); navigate("/Login")}}>Login</MenuItem>}
+            
           </Menu>
           </Toolbar>
         </AppBar>

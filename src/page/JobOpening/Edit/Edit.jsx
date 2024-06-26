@@ -96,8 +96,10 @@ const Edit = ({ open, handleClose, jobOpeningId, onUpdate }) => {
       }
     };
 
-    obtainJobOpening();
-    companyList();
+    if (jobOpeningId) {
+      obtainJobOpening();
+      companyList();
+    }
   }, [jobOpeningId]);
 
   const handleChange = (e) => {

@@ -10,17 +10,17 @@ import {
   Chip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   flexGrow: 1,
   position: "relative",
 }));
 
-const CandidateCard = ({ candidate, setDel, onEdit }) => {
+const CandidateCard = ({ candidate, setDel, onEdit, onApplication }) => {
   return (
-    <Grid item xs={12} md={6} lg={4}>
+    <Grid2 item xs={12} md={6} lg={4}>
       <StyledCard>
         <CardHeader
           avatar={<Avatar>{candidate.first_name[0]}</Avatar>}
@@ -37,10 +37,11 @@ const CandidateCard = ({ candidate, setDel, onEdit }) => {
         </CardContent>
         <CardContent>
           {/* <Button onClick={() => onEdit(candidate.id)}>Editar</Button> */}
-          <DeleteModal id={candidate.id} setDel={setDel} />
+          {/* <DeleteModal id={candidate.id} setDel={setDel} /> */}
+          { onApplication ? <Button onClick={() => onApplication(candidate.id)}>Application</Button> : ""}
         </CardContent>
       </StyledCard>
-    </Grid>
+    </Grid2>
   );
 };
 
@@ -48,6 +49,7 @@ CandidateCard.propTypes = {
   candidate: PropTypes.object,
   setDel: PropTypes.func,
   onEdit: PropTypes.func,
+  onApplication: PropTypes.func,
 };
 
 export default CandidateCard;

@@ -4,16 +4,12 @@ import { Box } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import UserCard from "../UserCard/UserCard";
 
-const ListCard = ({ objects, type, delObject, editObject, setCharge }) => {
+const ListCard = ({ objects, type, delObject, editObject, setCharge, showApplications }) => {
   switch (type) {
     case "jobOpening":
       return (
         <>
-          <Grid2
-            container
-            spacing={2}
-            sx={{ width: "100%", height: "100%", padding: 2 }}
-          >
+          <Grid2 container spacing={3} xs={12} sx={{ width: "100%", height: "100%", padding: 2, flexGrow: "1", alignContent: "flex-start"}} >
             {objects.jobOpenings.map((object) => (
               <JobOpeningCard
                 key={object.id}
@@ -21,6 +17,7 @@ const ListCard = ({ objects, type, delObject, editObject, setCharge }) => {
                 delJobOpening={delObject}
                 setCharge={setCharge}
                 edit={editObject}
+                showApplications={showApplications}
               />
             ))}
           </Grid2>
@@ -58,6 +55,7 @@ ListCard.propTypes = {
   delObject: PropTypes.func,
   editObject: PropTypes.func,
   setCharge: PropTypes.func,
+  showApplications: PropTypes.func,
 };
 
 export default ListCard;

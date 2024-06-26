@@ -30,7 +30,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   // marginTop: theme.spacing(5),
 }));
 
-const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
+const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit, showApplications }) => {
   // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -58,7 +58,7 @@ const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
 
   return (
     <>
-      <Grid2 xs={12} md={6} lg={4} sx={{ flexGrow: "1", maxHeight: "250px"}}>
+      <Grid2 item xs={12} md={6} lg={4}>
         <StyledCard>
           <CardHeader
             // action={
@@ -88,7 +88,9 @@ const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
           <CardContent>
           <Stack direction="row" spacing={2}>
             <Button onClick={() => edit(jobOpening.id)}>Edit</Button>
-            <DeleteModal id={jobOpening.id} setDel={setCharge} />
+            {/* <DeleteModal id={jobOpening.id} setDel={setCharge} /> */}
+            <Button onClick={() => showApplications(jobOpening.id)}>Applications</Button>
+
           </Stack>
         </CardContent>
         </StyledCard>
@@ -102,6 +104,7 @@ JobOpening.propTypes = {
   delJobOpening: PropTypes.func,
   setCharge: PropTypes.func,
   edit: PropTypes.func,
+  showApplications: PropTypes.func,
 };
 
 export default JobOpening;
