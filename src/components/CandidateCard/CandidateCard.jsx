@@ -29,10 +29,10 @@ const CandidateCard = ({ candidate, setDel, onEdit }) => {
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Dirección: {candidate.address}
+            Address: {candidate.address}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Teléfono: {candidate.phone}
+            Phone: {candidate.phone}
           </Typography>
         </CardContent>
         <CardContent>
