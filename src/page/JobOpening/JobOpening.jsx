@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./JobOpening.css";
-import "./ModalJobOpening";
+import ModalJobOpening from "./modalJobOpening";
 import {
   getAllJobOpening,
 //   getJobOpening,
