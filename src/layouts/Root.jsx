@@ -11,16 +11,16 @@ let pages = [];
 
 const pagesAdmin = [
   // { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/Candidate" },
-  { name: "Jobs", path: "/JobOpening" },
-  { name: "Users", path: "/User" },
-  { name: "Company", path: "/Company" },
+  { name: "Candidates", path: "/Gestion/Candidate" },
+  { name: "Jobs", path: "/Gestion/JobOpening" },
+  { name: "Users", path: "/Gestion/User" },
+  { name: "Company", path: "/Gestion/Company" },
 ];
 
 const pagesRecruiter = [
   // { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/Candidate" },
-  { name: "Jobs", path: "/JobOpening" },
+  { name: "Candidates", path: "/Gestion/Candidate" },
+  { name: "Jobs", path: "/Gestion/JobOpening" },
 ];
 
 // const pages = [

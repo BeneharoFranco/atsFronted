@@ -40,7 +40,7 @@ const UserAdd = () => {
     event.preventDefault();
     console.log(form);
     await createOneUser(form);
-    navigate("/User");
+    navigate("/Gestion/User");
   };
 
   const [value, setValue] = useState("");

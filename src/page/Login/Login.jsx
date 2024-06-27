@@ -30,9 +30,9 @@ const Login = () => {
       const data = await login(formData);
       console.log("Login successful:", data);
       if (data.role == "admin"){
-        navigate("/User");        
+        navigate("/Gestion/User");        
       }else if (data.role == "recruiter") {
-        navigate("/JobOpening");
+        navigate("/Gestion/JobOpening");
       } else {
         setAlert(true)
       }

@@ -48,13 +48,13 @@ const Header = ({open, toggleDrawer, drawerWidth}) => {
     setAnchorEl(null);
     // localStorage.removeItem("token");
     // localStorage.removeItem("role");
-    // navigate("/Login");
-    // navigate("/Home");
+    // navigate("/Gestion/Login");
+    // navigate("/Gestion/Home");
   };
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    navigate("/Login");
+    navigate("/Gestion/Login");
   }
 
   return (
@@ -128,7 +128,7 @@ const Header = ({open, toggleDrawer, drawerWidth}) => {
             onClose={handleClose}
           >
             <MenuItem onClick={() => {handleClose();navigate("/Register");}}>Register</MenuItem>
-            {localStorage.getItem("token") ? <MenuItem onClick={logout}>Log Out</MenuItem> : <MenuItem onClick={() => {handleClose(); navigate("/Login")}}>Login</MenuItem>}
+            {localStorage.getItem("token") ? <MenuItem onClick={logout}>Log Out</MenuItem> : <MenuItem onClick={() => {handleClose(); navigate("/Gestion/Login")}}>Login</MenuItem>}
             
           </Menu>
           </Toolbar>

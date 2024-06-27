@@ -9,12 +9,25 @@ import {
   Container,
   Stack,
   Alert,
+  styled,
 } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import UploadFile from "../../../components/UploadFile/UploadFile";
 import { createCandidate } from "../../../services/candidateService";
 import { useNavigate } from "react-router-dom";
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const CandidateAdd = () => {
   const [form, setForm] = React.useState({
@@ -27,12 +40,36 @@ const CandidateAdd = () => {
     photo: null,
   });
 
+  // const [formData, setFormData] = React.useState(new FormData());
+
   const handleChange = (event) => {
     const { id, name, value } = event.target;
     setForm({
       ...form,
       [id || name]: value,
     });
+  };
+  // OnChange File
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function() {
+      console.log(reader.result);
+      setForm({
+        ...form,
+        resume: reader.result,
+      });
+    };
+
+    reader.onerror = function() {
+      console.log(reader.error);
+    };
+    // const formData = new FormData();
+    // formData.append('resume', file);
+    
+    // setFormData(formData);
   };
 
   const navigate = useNavigate();
@@ -45,10 +82,19 @@ const CandidateAdd = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // for (var key in form){
+    //   var value = form[key];
+    //   formData.append(key, value);
+    //   setFormData(formData);
+    // }
+
     const { message } = await createCandidate(form);
+    // const { message } = await createCandidate(formData);
+    // setFormData(new FormData());
     if (message == "Candidate created") {
       setAlert(true);
     }
+
   };
 
   const [value, setValue] = useState("");
@@ -118,6 +164,8 @@ const CandidateAdd = () => {
             error={error}
             helperText={error ? "Only numbers are allowed" : ""}
             value={form.phone}
+            fullWidth
+            required
             onChange={handleChangeNum}
           />
         </Stack>
@@ -129,12 +177,18 @@ const CandidateAdd = () => {
           label="address"
           onChange={handleChange}
           value={form.address}
-          required
           fullWidth
           sx={{ mb: 4 }}
         />
+        
 
-        {/*  <div>  <UploadFile /> </div> */}
+        <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+          <Button component="label" role={undefined} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />} >
+            Upload CV
+            <VisuallyHiddenInput id="resume" name="resume" type="file" onChange={handleFileUpload}/>
+          </Button>
+        </Stack>
+        
         <Button
           type="submit"
           variant="contained"

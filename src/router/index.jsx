@@ -11,10 +11,28 @@ import EditJobOpening from "../page/JobOpening/Edit/Edit";
 import UserAdd from "../page/Users/UserAdd/UserAdd";
 import Candidate from "../page/Candidate/Candidate";
 import CandidateAdd from "../page/Candidate/CandidateAdd/CandidateAdd";
+import Public from "../layouts/Public/Public";
 
 const router = createBrowserRouter([
   {
-    path: "",
+    path: "/Gestion/login",
+    element: <Login />,
+    loader: () => {
+      if ( localStorage.getItem("token") && localStorage.getItem("token") !== undefined ) {
+        if (localStorage.getItem("role") == "admin") {
+          return redirect("/Gestion/User");
+        } else if(localStorage.getItem("role") == "recruiter") {
+          return redirect("/Gestion/Candidate");
+        } else{
+          return null;
+        }
+      } else {
+        return null;
+      }
+    },
+  },
+  {
+    path: "/Gestion",
     element: <Root />,
     errorElement: (
       <Root>
@@ -23,19 +41,19 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "",
+        path: "/Gestion",
         element: <CandidateAdd />,
         loader: () => {
           if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
-            return redirect("/Register"); //If the user isn't logged in, we redirect to the login page.
+            return redirect("/Gestion/Login"); //If the user isn't logged in, we redirect to the login page.
           } else if (localStorage.getItem("role") == "admin") {
-            return redirect("/User");
+            return redirect("/Gestion/User");
           } else if(localStorage.getItem("role") == "recruiter") {
-            return redirect("/Candidate");
+            return redirect("/Gestion/Candidate");
           } else{
-            return null;
+            return redirect("/Gestion/Login");
           }
         },
       },
@@ -49,62 +67,48 @@ const router = createBrowserRouter([
       //     ) {
       //       localStorage.removeItem("token");
       //       localStorage.removeItem("role");
-      //       return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+      //       return redirect("/Gestion/login"); //If the user isn't logged in, we redirect to the login page.
       //     } else {
       //       return null;
       //     }
       //   },
       // },
       {
-        path: "/User",
+        path: "/Gestion/User",
         element: <User />,
         loader: () => {
           if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
-            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+            return redirect("/Gestion/login"); //If the user isn't logged in, we redirect to the login page.
           } else if (localStorage.getItem("role") == "recruiter") {
-            return redirect("/Candidate");
+            return redirect("/Gestion/Candidate");
           } else{
             return null;
           }
         },
       },
       {
-        path: "/Candidate",
+        path: "/Gestion/Candidate",
         element: <Candidate />,
         loader: () => {
           if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
-            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+            return redirect("/Gestion/login"); //If the user isn't logged in, we redirect to the login page.
           } else{
             return null;
           }
         },
       },
       {
-        path: "/Register",
-        element: <CandidateAdd />/* ,
-        loader: () => {
-          if (
-            !localStorage.getItem("token") ||
-            localStorage.getItem("token") == undefined
-          ) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("role");
-            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
-          }
-        }, */
-      },
-      {
-        path: "/JobOpening",
+        path: "/Gestion/JobOpening",
         element: <JobOpening />,
         loader: () => {
           if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
-            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+            return redirect("/Gestion/login"); //If the user isn't logged in, we redirect to the login page.
           } else {
             return null;
           }
@@ -117,20 +121,31 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <Login />,
-    loader: () => {
-      if ( localStorage.getItem("token") && localStorage.getItem("token") !== undefined ) {
-        if (localStorage.getItem("role") == "admin") {
-          return redirect("/User");
-        } else if(localStorage.getItem("role") == "recruiter") {
-          return redirect("/Candidate");
-        } else{
+    path: "",
+    element: <Public />,
+    errorElement: (
+      <Root>
+        <NotFound />
+      </Root>
+    ),
+    children: [
+      {
+        path: "",
+        element: <CandidateAdd />,
+        loader: () => {
+          return redirect("/Register");
+        },
+      },
+      {
+        path: "/Register",
+        element: <CandidateAdd />,
+        loader: () => {
           return null;
-        }
-      } else {
-        return null;
-      }
+        },
+      },
+    ],
+    loader: () => {
+      return null;
     },
   },
 ]);
