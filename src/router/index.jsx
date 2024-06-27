@@ -11,6 +11,7 @@ import EditJobOpening from "../page/JobOpening/Edit/Edit";
 import UserAdd from "../page/Users/UserAdd/UserAdd";
 import Candidate from "../page/Candidate/Candidate";
 import CandidateAdd from "../page/Candidate/CandidateAdd/CandidateAdd";
+import Company from "../page/Company/Company";
 
 const router = createBrowserRouter([
   {
@@ -26,15 +27,18 @@ const router = createBrowserRouter([
         path: "",
         element: <CandidateAdd />,
         loader: () => {
-          if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
+          if (
+            !localStorage.getItem("token") ||
+            localStorage.getItem("token") == undefined
+          ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
             return redirect("/Register"); //If the user isn't logged in, we redirect to the login page.
           } else if (localStorage.getItem("role") == "admin") {
             return redirect("/User");
-          } else if(localStorage.getItem("role") == "recruiter") {
+          } else if (localStorage.getItem("role") == "recruiter") {
             return redirect("/Candidate");
-          } else{
+          } else {
             return null;
           }
         },
@@ -59,13 +63,16 @@ const router = createBrowserRouter([
         path: "/User",
         element: <User />,
         loader: () => {
-          if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
+          if (
+            !localStorage.getItem("token") ||
+            localStorage.getItem("token") == undefined
+          ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
             return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
           } else if (localStorage.getItem("role") == "recruiter") {
             return redirect("/Candidate");
-          } else{
+          } else {
             return null;
           }
         },
@@ -74,18 +81,21 @@ const router = createBrowserRouter([
         path: "/Candidate",
         element: <Candidate />,
         loader: () => {
-          if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
+          if (
+            !localStorage.getItem("token") ||
+            localStorage.getItem("token") == undefined
+          ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
             return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
-          } else{
+          } else {
             return null;
           }
         },
       },
       {
         path: "/Register",
-        element: <CandidateAdd />/* ,
+        element: <CandidateAdd /> /* ,
         loader: () => {
           if (
             !localStorage.getItem("token") ||
@@ -95,13 +105,32 @@ const router = createBrowserRouter([
             localStorage.removeItem("role");
             return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
           }
-        }, */
+        }, */,
       },
       {
         path: "/JobOpening",
         element: <JobOpening />,
         loader: () => {
-          if ( !localStorage.getItem("token") || localStorage.getItem("token") == undefined ) {
+          if (
+            !localStorage.getItem("token") ||
+            localStorage.getItem("token") == undefined
+          ) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+            return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
+          } else {
+            return null;
+          }
+        },
+      },
+      {
+        path: "/Company",
+        element: <Company />,
+        loader: () => {
+          if (
+            !localStorage.getItem("token") ||
+            localStorage.getItem("token") == undefined
+          ) {
             localStorage.removeItem("token");
             localStorage.removeItem("role");
             return redirect("/login"); //If the user isn't logged in, we redirect to the login page.
@@ -120,12 +149,15 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     loader: () => {
-      if ( localStorage.getItem("token") && localStorage.getItem("token") !== undefined ) {
+      if (
+        localStorage.getItem("token") &&
+        localStorage.getItem("token") !== undefined
+      ) {
         if (localStorage.getItem("role") == "admin") {
           return redirect("/User");
-        } else if(localStorage.getItem("role") == "recruiter") {
+        } else if (localStorage.getItem("role") == "recruiter") {
           return redirect("/Candidate");
-        } else{
+        } else {
           return null;
         }
       } else {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { editJobOpening, getJobOpening } from "../../../services/jobOpeningService";
-import { getAllCompany } from "../../../services/CompanyService";
+import { getAllCompany } from "../../../services/companyService";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack, styled, TextField  } from "@mui/material";
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 

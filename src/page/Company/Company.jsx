@@ -1,4 +1,4 @@
-import "./AddCompany.css";
+import "./Company.css";
 import { useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 import { getAllCompany } from "../../services/companyService";

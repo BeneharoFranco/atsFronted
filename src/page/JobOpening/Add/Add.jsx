@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./Add.css";
 import { createJobOpening } from "../../../services/jobOpeningService";
-import { getAllCompany } from "../../../services/CompanyService";
+import { getAllCompany } from "../../../services/companyService";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, Stack, styled, TextField  } from "@mui/material";
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 
