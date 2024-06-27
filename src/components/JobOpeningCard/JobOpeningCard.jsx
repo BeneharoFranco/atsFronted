@@ -58,7 +58,7 @@ const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
 
   return (
     <>
-      <Grid2 xs={12} md={6} lg={4} sx={{ flexGrow: "1", maxHeight: "250px"}}>
+      <Grid2 xs={12} md={6} lg={4} sx={{ flexGrow: "1", maxHeight: "250px" }}>
         <StyledCard>
           <CardHeader
             // action={
@@ -71,7 +71,7 @@ const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
             subheader={jobOpening.description}
           />
 
-          <Chip label={jobOpening.status} color="success" sx={{ position: "absolute", top: "10px", right: "10px" }}/>
+          <Chip label={jobOpening.status} color="success" sx={{ position: "absolute", top: "10px", right: "10px" }} />
 
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -86,11 +86,11 @@ const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit }) => {
           </CardContent>
 
           <CardContent>
-          <Stack direction="row" spacing={2}>
-            <Button onClick={() => edit(jobOpening.id)}>Edit</Button>
-            <DeleteModal id={jobOpening.id} setDel={setCharge} />
-          </Stack>
-        </CardContent>
+            <Stack direction="row" spacing={2}>
+              <Button onClick={() => edit(jobOpening.id)}>Edit</Button>
+              <DeleteModal id={jobOpening.id} setDel={setCharge} />
+            </Stack>
+          </CardContent>
         </StyledCard>
       </Grid2>
     </>

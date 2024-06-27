@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header/Header";
-// import Footer from "../components/Footer/Footer";
+import Footer from "../components/Footer/Footer";
 import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme} from '@mui/material/styles';
