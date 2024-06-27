@@ -31,7 +31,7 @@ export default function DeleteModal({id, setDel}) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Delete</Button>
+      <Button variant="contained" color="error" onClick={handleOpen}>Delete</Button>
       <Modal
         open={open}
         onClose={handleClose}

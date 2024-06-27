@@ -114,7 +114,7 @@ const Candidate = () => {
           ))
         }
 
-      <Dialog open={openApplication} onClose={handleApplicationClose} maxWidth={"md"} fullWidth>
+      <Dialog open={openApplication} onClose={handleApplicationClose} maxWidth={"md"} fullWidth >
         <DialogTitle>Applications User</DialogTitle>
         <form onSubmit={handleSubmitApplication}>
           <DialogContent>

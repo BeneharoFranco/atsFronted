@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,7 @@ const CustomDrawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open, drawerWidth }) => ({
   "& .MuiDrawer-paper": {
+    backgroundColor: "#1976d2",
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
@@ -37,6 +39,7 @@ const CustomDrawer = styled(MuiDrawer, {
         width: theme.spacing(9),
       },
     }),
+    
   },
 }));
 
@@ -53,17 +56,20 @@ const Drawer = ({open, toggleDrawer, pages, drawerWidth}) => {
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon sx={{ color: "#fff" }}  />
           </IconButton>
         </Toolbar>
         <Divider />
         <List component="nav">
           {pages.map((page, idx) => (
-            <ListItemButton key={idx} component={Link} to={page.path}>
-              <ListItemIcon>
-                <DashboardIcon />
+            <ListItemButton key={idx} component={Link} to={page.path} >
+              <ListItemIcon color="error">
+                {/* <DashboardIcon color="#fff"  /> */}
+                {
+                  page.icon ? page.icon : <DashboardIcon sx={{ color: "#fff" }} />
+                }
               </ListItemIcon>
-              <ListItemText primary={page.name} />
+              <ListItemText primary={<Typography variant="span" style={{ color: '#FFFFFF' }}>{page.name}</Typography>} />
             </ListItemButton>
           ))}
         </List>

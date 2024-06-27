@@ -7,20 +7,26 @@ import { createTheme} from '@mui/material/styles';
 import Drawer from "../components/Drawer/Drawer";
 import { Outlet } from "react-router-dom";
 
+import GroupIcon from '@mui/icons-material/Group';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import WorkIcon from '@mui/icons-material/Work';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
 let pages = [];
 
 const pagesAdmin = [
   // { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/Gestion/Candidate" },
-  { name: "Jobs", path: "/Gestion/JobOpening" },
-  { name: "Users", path: "/Gestion/User" },
-  { name: "Company", path: "/Gestion/Company" },
+  { name: "Candidates", path: "/Gestion/Candidate", icon: <GroupIcon sx={{ color: "#fff" }} /> },
+  { name: "Jobs", path: "/Gestion/JobOpening", icon: <WorkIcon sx={{ color: "#fff" }} /> },
+  { name: "Users", path: "/Gestion/User", icon: <ManageAccountsIcon sx={{ color: "#fff" }} /> },
+  { name: "Company", path: "/Gestion/Company", icon: <ApartmentIcon sx={{ color: "#fff" }} /> },
 ];
 
 const pagesRecruiter = [
   // { name: "Home", path: "/Home" },
-  { name: "Candidates", path: "/Gestion/Candidate" },
-  { name: "Jobs", path: "/Gestion/JobOpening" },
+  { name: "Candidates", path: "/Gestion/Candidate", icon: <GroupIcon sx={{ color: "#fff" }} /> },
+  { name: "Jobs", path: "/Gestion/JobOpening", icon: <WorkIcon sx={{ color: "#fff" }} /> },
 ];
 
 // const pages = [
@@ -51,7 +57,7 @@ const Root = ({ children }) => {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", backgroundColor: "#eceff1" }}>
           <CssBaseline />
           <Header key={"header"} open={open} toggleDrawer={toggleDrawer} drawerWidth={drawerWidth}/>
           <Drawer key={"drawer"} open={open} toggleDrawer={toggleDrawer} pages={pages} drawerWidth={drawerWidth}/>

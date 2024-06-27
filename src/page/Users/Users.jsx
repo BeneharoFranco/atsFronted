@@ -58,7 +58,7 @@ const User = () => {
 
   return (
     <Grid2 minHeight={"85vh"} container spacing={3} width={"100%"} sx={{ flexGrow: "1" }}>
-      <Button variant="contained" onClick={handleAddOpen} sx={{ height: "40px" }}>Add</Button>
+      <Button variant="contained" color="success" onClick={handleAddOpen} sx={{ height: "40px" }}>Add</Button>
 
       <Grid2
         container

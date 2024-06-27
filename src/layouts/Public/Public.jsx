@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, Outlet } from 'react-router-dom';
 import { AppBar, Box, CssBaseline, Toolbar, Typography } from '@mui/material';
 import logo from "../../assets/logo.png";
+import Footer from '../../components/Footer/Footer';
 
 /*
 const styles = theme => ({
@@ -58,7 +59,7 @@ const styles = theme => ({
 const Public = ({ children/*, classes*/ }) => {
   return (
     <React.Fragment>
-      <CssBaseline />
+      <CssBaseline/>
       <AppBar position="static">
         <Toolbar>
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }} >
@@ -70,18 +71,19 @@ const Public = ({ children/*, classes*/ }) => {
         </Toolbar>
       </AppBar>
 
-      <Box component={"main"} minHeight={"75vh"} container spacing={3} width={"100%"} sx={{ px:10, py:5 }} >
+      <Box component={"main"} minHeight={"calc(100vh - 68px - 70px);"} container spacing={3} width={"100%"} sx={{ px:10, py:5, backgroundColor: "#eceff1" }}>
         {children ?? <Outlet />}
       </Box>
       {/* Footer */}
-      <footer /*className={classes.footer}*/>
+      {/* <footer>
         <Typography variant="h6" align="center" gutterBottom>
           Footer
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Something here to give the footer a purpose!
         </Typography>
-      </footer>
+      </footer> */}
+      <Footer />
       {/* End footer */}
     </React.Fragment>
   );

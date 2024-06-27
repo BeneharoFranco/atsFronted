@@ -25,9 +25,17 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 const StyledCard = styled(Card)(({ theme }) => ({
   // maxWidth: 345,
   flexGrow: 1,
-  position: "relative"
+  position: "relative",
   // margin: "auto",
   // marginTop: theme.spacing(5),
+  backgroundColor: "rgb(119 136 153 / 70%)",
+  color: "#fff",
+  fontWeight: "bold",
+  transition: "0.5s",
+  ':hover': {
+    boxShadow: theme.shadows[10],
+    backgroundColor: "rgb(119 136 153)",
+  },
 }));
 
 const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit, showApplications }) => {
@@ -66,30 +74,30 @@ const JobOpening = ({ jobOpening, delJobOpening, setCharge, edit, showApplicatio
             //     <MoreVertIcon />
             //   </IconButton>
             // }
-            title={`${jobOpening.title}`}
+            title={jobOpening.title}
             // subheader={<Avatar>{jobOpening.id_company}</Avatar>}
-            subheader={jobOpening.description}
+            subheader={<Typography sx={{ color: "#fff", fontWeight: "bold" }}>{jobOpening.description}</Typography>}
           />
 
           <Chip label={jobOpening.status} color="success" sx={{ position: "absolute", top: "10px", right: "10px" }}/>
 
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body2" color="#fff" component="p" fontWeight="bold">
               Posting Date: {Moment(jobOpening.posting_date).format('DD MMM YYYY hh:mm') || ""}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body2" color="#fff" component="p" fontWeight="bold">
               End Date: {Moment(jobOpening.end_date).format('DD MMM YYYY hh:mm') || ""}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body2" color="#fff" component="p" fontWeight="bold">
               Location: {jobOpening.location || ""}
             </Typography>
           </CardContent>
 
           <CardContent>
           <Stack direction="row" spacing={2}>
-            <Button onClick={() => edit(jobOpening.id)}>Edit</Button>
+            <Button variant="contained" onClick={() => edit(jobOpening.id)}>Edit</Button>
             {/* <DeleteModal id={jobOpening.id} setDel={setCharge} /> */}
-            <Button onClick={() => showApplications(jobOpening.id)}>Applications</Button>
+            <Button variant="contained" color="success" sx={{ backgroundColor: "#81c784" }} onClick={() => showApplications(jobOpening.id)}>Applications</Button>
 
           </Stack>
         </CardContent>

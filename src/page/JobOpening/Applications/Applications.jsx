@@ -26,7 +26,7 @@ const Applications = ({ open, handleClose, jobOpeningId }) => {
 
   return (
     <>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogTitle>Applications</DialogTitle>
         {/* <DialogContent container xs={12} spacing={3} sx={{ width: "100%", height: "100%", padding: 2, flexGrow: "1", alignContent: "flex-start", }} > */}
         <DialogContent>

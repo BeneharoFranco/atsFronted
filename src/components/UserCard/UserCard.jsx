@@ -18,9 +18,17 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 const StyledCard = styled(Card)(({ theme }) => ({
   // maxWidth: 345,
   flexGrow: 1,
-  position: "relative"
+  position: "relative",
   // margin: "auto",
   // marginTop: theme.spacing(5),
+  backgroundColor: "rgb(119 136 153 / 70%)",
+  color: "#fff",
+  fontWeight: "bold",
+  transition: "0.5s",
+  ':hover': {
+    boxShadow: theme.shadows[10],
+    backgroundColor: "rgb(119 136 153)",
+  },
 }));
 
 const UserCard = ({ users, setDel, onEdit }) => {
@@ -28,16 +36,16 @@ const UserCard = ({ users, setDel, onEdit }) => {
     <Grid2 xs={12} md={6} lg={4} sx={{ flexGrow: "1", maxHeight: "250px"}}>
       <StyledCard>
         <CardHeader
-          avatar={<Avatar>{users.first_name[0]}</Avatar>}
-          title={`${users.first_name} ${users.last_name}`}
-          subheader={users.role}
+          avatar={<Avatar sx={{ backgroundColor: "#1976d2"}}>{users.first_name[0].toUpperCase()}</Avatar>}
+          title={<Typography sx={{ color: "#fff", fontWeight: "bold" }}>{users.first_name} {users.last_name}</Typography>}
+          subheader={<Typography sx={{ color: "#fff", fontWeight: "bold" }}>{users.role}</Typography>}
         />
         {users.valid ? <Chip label="Activo" color="success" sx={{ position: "absolute", top: "10px", right: "10px" }}/> : <Chip label="Inactive" color="error"  sx={{ position: "absolute", top: "10px", right: "10px" }}/>}
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="#fff" component="p" fontWeight="bold">
             Email: {users.email}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="#fff" component="p" fontWeight="bold">
             Phone: {users.phone}
           </Typography>
         </CardContent>
@@ -63,7 +71,7 @@ const UserCard = ({ users, setDel, onEdit }) => {
         </CardContent> */}
         <CardContent>
           <Stack direction="row" spacing={2}>
-            <Button onClick={() => onEdit(users.id)}>Edit</Button>
+            <Button variant="contained" onClick={() => onEdit(users.id)}>Edit</Button>
             <DeleteModal id={users.id} setDel={setDel} />
           </Stack>
         </CardContent>

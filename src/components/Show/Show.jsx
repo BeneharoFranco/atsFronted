@@ -49,6 +49,7 @@ const Show = () => {
         scroll="paper"
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
+        sx={{ backgroundColor: "#eceff1" }}
       >
         {/* <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle> */}
         <DialogContent dividers={scroll === "paper"}>
